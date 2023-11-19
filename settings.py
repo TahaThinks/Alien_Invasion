@@ -19,5 +19,5 @@ class Settings:
         self.alien_speed = 1.0
         self.fleet_drop_speed = 10
         # fleet_direction of 1 represents right; -1 represent left
-        self.fleet_direction = 1
+        self.fleet_direction = 0.25
         
