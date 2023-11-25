@@ -20,6 +20,9 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width,self.settings.screen_height))
         
+        # Create an instance to store game statistics.
+        self.stats = GameStats(self)
+        
         pygame.display.set_caption("Alien Invasion by Taha")
 
         self.ship = Ship(self)
@@ -114,6 +117,21 @@ class AlienInvasion:
             for alien_number in range(number_aliens_x):
                 self._create_alien(alien_number, row_number)
 
+    def _ship_hit(self):
+        """Respond to the ship being hit by an alien"""
+        # Decrement ships_left:
+        self.stats.ships_left -= 1
+
+        # Get rid of any remaining aliens and bullets:
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # Create a new fleet and center the ship:
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Pause:
+        sleep(0.5)
 
     def _create_alien(self, alien_number, row_number):
         """Create an anlien and place it in the row."""
@@ -145,9 +163,20 @@ class AlienInvasion:
 
         # Look for alien-ship collisions.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship Hit!!!")
+            #print("Ship Hit!!!")
+            self._ship_hit()
 
-    
+        # Look for aliens hitting the bottom of the screen.
+        self._check_aliens_bottom()
+
+    def _check_aliens_bottom(self):
+        """Check if any aliens have reached the bottom of the Screen."""
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                self._ship_hit()
+                break
+
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen"""
         #Redraw the screen during each pass through the loop
