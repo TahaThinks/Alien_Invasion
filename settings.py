@@ -20,4 +20,8 @@ class Settings:
         self.fleet_drop_speed = 10
         # fleet_direction of 1 represents right; -1 represent left
         self.fleet_direction = 0.25
+
+        #Ship Settings:
+        self.ship_speed = 1.5
+        self.ship_limit = 3
         
