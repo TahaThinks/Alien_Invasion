@@ -163,6 +163,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _create_alien(self, alien_number, row_number):
         """Create an anlien and place it in the row."""
