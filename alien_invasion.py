@@ -31,8 +31,6 @@ class AlienInvasion:
 
         self._create_fleet()
 
-
-
     def run_game(self):
         """Start the main loop of the game."""
         while True:
