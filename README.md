@@ -1,1 +1,1 @@
-inTa
+inT
